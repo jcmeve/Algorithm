@@ -4,10 +4,7 @@ using namespace std;
 
 vector<int> solution(int n, vector<int> info) {
     vector<int> answer(11,0);
-    //점수는 먹거나 안먹거나 둘 중 하나임
-    //info[i]+1만큼 투자해서 i점을 먹거나
-    //i점에 0발쏘고 안먹거나
-    //즉 2^11
+
     int maxDiff = 0;
     for(int i =0;i<(1<<11);++i){
         int point=0;
