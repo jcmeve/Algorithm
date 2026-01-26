@@ -6,7 +6,6 @@ using namespace std;
 vector<int> solution(vector<vector<int>> users, vector<int> emoticons) {
     vector<int> answer={0,0};
     
-    //emoticons크기가 작으므로 완탐
     int arr[]={10,20,30,40};
     
     for(int i = 0;i < 4<<2*(emoticons.size()-1);++i){
@@ -38,12 +37,8 @@ vector<int> solution(vector<vector<int>> users, vector<int> emoticons) {
         }if(answer[0] == subCnt){
             answer[1] = answer[1]>totalSell?answer[1]:totalSell;
         }
-        
-        
 
     }
-    
-    
     
     return answer;
 }
