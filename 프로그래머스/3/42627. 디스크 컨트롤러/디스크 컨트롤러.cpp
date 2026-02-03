@@ -7,12 +7,12 @@ using namespace std;
 
 struct my_comp {
 
-    bool operator()(vector<int>& _Left, vector<int>& _Right) {
-        for (int i = 0; i < _Left.size(); ++i) {
-            if (_Left[i] == _Right[i]) {
+    bool operator()(vector<int>& a, vector<int>& b) {
+        for (int i = 0; i < a.size(); ++i) {
+            if (a[i] == b[i]) {
                 continue;
             }
-            return _Left[i] > _Right[i];
+            return a[i] > b[i];
         }
         return false;
     }
