@@ -23,6 +23,7 @@ vector<int> solution(int n, vector<vector<int>> paths, vector<int> gates, vector
         int curr_intensity = q.top().first;
         int curr_v = q.top().second;
         q.pop();
+        if(min_intensity[curr_v] < curr_intensity) continue;
         if(find(summits.begin(),summits.end(),curr_v) != summits.end()) continue;
         
         for(auto p : g[curr_v]){
