@@ -18,7 +18,7 @@ vector<int> solution(int target) {
             
             if(temp.first<best.first) best = temp;
             else if(temp.first == best.first && best.second<temp.second) best = temp;
-
+            
         }
         cache[i] = best;
     }
