@@ -8,6 +8,9 @@ int dirR[4] = { 0,0,1,-1 };
 int dirC[4] = { 1,-1,0,0 };
 
 int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
     int r, c;
     cin >> r >> c;
     vector<vector<int>> map(r, vector<int>(c, INT_MAX));
