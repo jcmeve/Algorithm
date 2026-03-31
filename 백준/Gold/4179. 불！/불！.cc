@@ -14,7 +14,6 @@ int main() {
     int r, c;
     cin >> r >> c;
     vector<vector<int>> map(r, vector<int>(c, INT_MAX));
-    vector<vector<int>> dist(r, vector<int>(c, -1));
 
     queue<pair<int, int>> fire;
     queue<pair<int, int>> jihun;
@@ -27,7 +26,6 @@ int main() {
             {
             case 'J':
                 jihun.push({ i,j });
-                dist[i][j] = 0;
                 break;
             case 'F':
                 fire.push({ i,j });
@@ -65,24 +63,32 @@ int main() {
         }
     }
 
+    turn = 0;
+    if (!jihun.empty()) {
+        map[jihun.front().first][jihun.front().second] = -1;
+    }
     while (!jihun.empty()) {
-        pair<int, int> cur = jihun.front();
-        jihun.pop();
+        ++turn;
+        int size = jihun.size();
+        for (int i = 0; i < size; ++i) {
+            pair<int, int> cur = jihun.front();
+            jihun.pop();
 
-        if (cur.first == 0 || cur.first == r - 1 || cur.second == 0 || cur.second == c - 1) {
-            cout << dist[cur.first][cur.second] + 1;
-            return 0;
-        }
+            if (cur.first == 0 || cur.first == r - 1 || cur.second == 0 || cur.second == c - 1) {
+                cout << turn;
+                return 0;
+            }
 
-        for (int i = 0; i < 4; ++i) {
-            int nr = cur.first + dirR[i];
-            int nc = cur.second + dirC[i];
+            for (int i = 0; i < 4; ++i) {
+                int nr = cur.first + dirR[i];
+                int nc = cur.second + dirC[i];
 
-            if (nr >= 0 && nr < r && nc >= 0 && nc < c) {
-                if (map[nr][nc] != -1 && dist[nr][nc] == -1) {
-                    if (map[nr][nc] > dist[cur.first][cur.second] + 1) {
-                        dist[nr][nc] = dist[cur.first][cur.second] + 1;
-                        jihun.push({ nr, nc });
+                if (nr >= 0 && nr < r && nc >= 0 && nc < c) {
+                    if (map[nr][nc] != -1) {
+                        if (map[nr][nc] > turn) {
+                            jihun.push({ nr, nc });
+                            map[nr][nc] = -1;
+                        }
                     }
                 }
             }
