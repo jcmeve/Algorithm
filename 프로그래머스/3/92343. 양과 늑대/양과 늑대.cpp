@@ -5,7 +5,7 @@ using namespace std;
 vector<int>* g_info;
 vector<vector<int>> g_edges;
 int answer = 0;
-void dfs(int nr_sheep,int nr_wolf, vector<int> targets) {
+void f(int nr_sheep,int nr_wolf, vector<int> targets) {
 
     answer = max(answer, nr_sheep);
 
@@ -26,7 +26,7 @@ void dfs(int nr_sheep,int nr_wolf, vector<int> targets) {
             next_targets.push_back(i);
         }
         
-        dfs(next_nr_sheep , next_nr_wolf, next_targets);
+        f(next_nr_sheep , next_nr_wolf, next_targets);
     }
 }
 
@@ -42,7 +42,7 @@ int solution(vector<int> info, vector<vector<int>> edges) {
     }
 
 
-    dfs(1, 0, targets);
+    f(0, 0, {0});
 
 
     return answer;
