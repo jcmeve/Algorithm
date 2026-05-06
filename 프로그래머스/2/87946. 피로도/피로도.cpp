@@ -5,31 +5,30 @@
 
 using namespace std;
 
-bool compare(vector<int> a, vector<int> b){
-    if(a[0] == b[0])
-        return a[1]>b[1];
-    return a[0]>b[0];
+int answer = -1;
+
+
+void f(int k, int cnt, vector<bool>& visited, vector<vector<int>>& dungeons){
+    if(cnt == visited.size()){
+        answer = cnt;
+        return;
+    }
+    for(int i =0; i < dungeons.size(); ++i){
+        if(visited[i]) continue;
+        if(k<dungeons[i][0]){
+            answer = max(answer, cnt);
+            continue;
+        }
+        visited[i] = true;
+        f(k-dungeons[i][1], cnt+1, visited, dungeons);
+        visited[i] = false;
+    }
 }
 
-int solution(int k, vector<vector<int>> dungeons) {
-    int answer = -1;
-    
-    sort(dungeons.begin(), dungeons.end(), &compare);
-    do{
 
-        int s = 0;
-        for(int i = 0 ; i < dungeons.size(); ++i){
-            if(s + dungeons[i][0] > k){
-                answer = answer>i?answer:i;
-                break;
-            }
-            s+=dungeons[i][1];
-            if( i == dungeons.size()-1){
-                return i+1;
-            }
-        }
-        
-    }while(next_permutation(dungeons.begin(), dungeons.end(), &compare));
-    
+int solution(int k, vector<vector<int>> dungeons) {
+    vector<bool> v(dungeons.size(),false);
+    f(k,0,v, dungeons);
+
     return answer;
 }
