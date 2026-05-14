@@ -13,7 +13,8 @@ int solution(int n) {
         }else{
             if(n%i != i/2) continue;
             int l = n/i;
-            if(l - (i/2-1)>=1)
+            int r = n-l;
+            if(l - (i/2-1)>=1 && r + (i/2-1) <= n)
                 ++answer;
         }
     }
