@@ -2,6 +2,9 @@
 #include<queue>
 using namespace std;
 
+int dy[]{0,0,-1,1};
+int dx[]{-1,1,0,0};
+
 int solution(vector<vector<int> > maps)
 {
     int answer = 0;
@@ -13,30 +16,21 @@ int solution(vector<vector<int> > maps)
         auto coord = q.front();q.pop();
         int y = coord.first;
         int x = coord.second;
+        
         if(y == maps.size()-1 && x == maps[0].size()-1){
             return d[y][x];
         }
         
-        if(y+1 <maps.size() && maps[y+1][x]  && d[y+1][x] > d[y][x]+1){
-            d[y+1][x] = d[y][x]+1;
-            q.push({y+1,x});
+        for(int i =0; i < 4; ++i){
+            int newY = y+dy[i];
+            int newX = x+dx[i];
+            if(newY >=0 && newX >=0 && newX <maps[0].size() && newY <maps.size() && maps[newY][newX]  && d[newY][newX] > d[y][x]+1){
+                d[newY][newX] = d[y][x]+1;
+                q.push({newY,newX});
+            }
+            
         }
-
-        if(y-1 >=0 && maps[y-1][x]  && d[y-1][x] > d[y][x]+1){
-            d[y-1][x] = d[y][x]+1;
-            q.push({y-1,x});
-        }
-
-        if(x+1 <maps[0].size() && maps[y][x+1]  && d[y][x+1] > d[y][x]+1){
-            d[y][x+1] = d[y][x]+1;
-            q.push({y,x+1});
-        }
-
-        if(x-1 >=0 && maps[y][x-1]  && d[y][x-1] > d[y][x]+1){
-            d[y][x-1] = d[y][x]+1;
-            q.push({y,x-1});
-        }
-
+\
         
         
     }
